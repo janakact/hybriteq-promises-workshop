@@ -1,20 +1,29 @@
-const sayHello = () => console.log('Hello World')
-
 function sayHelloLaterWithPromise () {
   const promiseWork = (resolve, reject) => {
     setTimeout(() => {
-      sayHello()
-      resolve()
+      console.log('Hello World')
+      reject()
     }, 2000)
   }
 
   return new Promise(promiseWork)
 }
 
-sayHelloLaterWithPromise()
+const promise = sayHelloLaterWithPromise()
+
+promise
   .then(() => {
     console.log('How are you?')
+    return 10
   })
-  .then(() => {
-    console.log('Nice to see you')
+  .then(value => {
+    console.log('Nice to see you', value)
+    return 232
+  })
+  .catch(e => {
+    console.log('Error')
+    return 0
+  })
+  .then(n => {
+    console.log('After catch', n)
   })
